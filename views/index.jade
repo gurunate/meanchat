@@ -2,12 +2,11 @@ extends layout
 
 block content
   h1= title
-  div(id='chat')
+  div(id='chat', ng-app="chatApp", ng-controller="chatCtrl")
     ul
-      li
-        strong guest1234
-        span hello
-     form
-       input(type='text')
+      li(ng-repeat="m in messages", ng-cloak)
+        strong {{m.sender}} 
+        span {{m.msg}}
+     form(ng-submit="chat(msg)")
+       input(type='text', ng-model='msg')
        button Send
-  
