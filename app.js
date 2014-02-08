@@ -23,7 +23,6 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(app.router);
-// app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 
 app.use(stylus.middleware({
 	src : __dirname + '/public',
@@ -42,6 +41,11 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.get('/users', user.list);
 
-http.createServer(app).listen(app.get('port'), function(){
+var server = http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
+var socket = require('./routes/socket');
+var io = require('socket.io').listen(server);
+
+io.set('heartbeat interval', 100);
+io.sockets.on('connection', socket);

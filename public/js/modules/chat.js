@@ -1,19 +1,29 @@
 /**
  * @author Nate Johnson
  */
-define(['angular', 'domReady!'], function() {
+define(['angular', 'socket', 'domReady!'], function() {
+	var socket = io.connect();
 	var chatApp = angular.module('chatApp', []);
 
 	chatApp.controller('chatCtrl', function($scope, $timeout) {
 		$scope.messages = [];
 		
 		$scope.chat = function(txt) {
-			$scope.messages.push({
+			var msg = {
 				sender : 'testguy',
 				msg : txt
-			});
+			};
+			
+			$scope.messages.push(msg);
+			socket.emit('chat', msg);
 			
 			$scope.msg = '';
 		};
+		
+		socket.on('chat', function(msg) {
+	 		$timeout(function() {
+		 		$scope.messages.push(msg);
+	 		}, 100);
+	 	});
 	});
 }); 
