@@ -1,0 +1,6 @@
+#chat{border:1px solid #808080;width:300px;-webkit-border-radius:5px;border-radius:5px;}
+#chat ul{list-style:none;margin:0;padding:4px;height:300px;}
+#chat ul li strong{margin-right:2px}
+#chat ul li span{font-style:italic}
+#chat form{margin:5px;border-top:2px solid #404040;}
+#chat form input{border:1px solid #c0c0c0;width:235px}
