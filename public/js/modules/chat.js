@@ -3,9 +3,8 @@
  */
 define(['angular', 'socket', 'domReady!'], function() {
 	var socket = io.connect();
-	var chatApp = angular.module('chatApp', []);
 
-	chatApp.controller('chatCtrl', function($scope, $timeout) {
+	angular.module('chatApp', []).controller('chatCtrl', function($scope, $timeout) {
 		$scope.messages = [];
 		
 		$scope.chat = function(txt) {
